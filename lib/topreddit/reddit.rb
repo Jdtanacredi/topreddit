@@ -6,7 +6,7 @@ class Reddit
   attr_reader :endpoint_url, :parsed_response
 
   def initialize
-    @endpoint_url = 'httpe://www.reddit.com/r/cats/top/.json?sort=top&t=day'
+    @endpoint_url = 'http://www.reddit.com/r/cats/top/.json?sort=top&t=day'
     self.get
   end
 
@@ -23,7 +23,11 @@ class Reddit
     parsed_response['data']['children'].first['data']
   end
 
-  def display
+  def bottom
+    parsed_response['data']['children'].last['data']
+  end
+
+  def displaytop
     %{
     "Today's top cat post is:"
     "Title: #{top['title']}"
@@ -32,4 +36,13 @@ class Reddit
     }
   end
 
+  def displaybottom
+    %{
+    'Today's worse cat post is:'
+    "Title: #{bottom['title']}"
+    "Author: #{bottom['author']}"
+    "Link: #{bottom['url']}"
+    }
+  end
+  binding.pry
 end

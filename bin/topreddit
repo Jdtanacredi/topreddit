@@ -1,0 +1,4 @@
+require 'topreddit'
+
+reddit = Reddit.new
+puts reddit.displaytop
